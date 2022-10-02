@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { addCustomer } from "../feature/customerSlice";
 import { removeReservation } from "../feature/reservationSlice";
 import { v4 as uuid } from "uuid";
 
@@ -13,6 +14,16 @@ function ReservationCard({ name, index }: ReservationCardType) {
     return (
         <div
             className="reservation-card-container"
+            onClick={() => {
+                dispatch(removeReservation(index));
+                dispatch(
+                    addCustomer({
+                        id: uuid(),
+                        name,
+                        food: [],
+                    })
+                );
+            }}
         >
             <p>{name}</p>
         </div>
